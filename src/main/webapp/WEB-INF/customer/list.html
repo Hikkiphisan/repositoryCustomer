@@ -50,11 +50,28 @@
 
     </tbody>
 </table>
+
+<!--Chỉ hiển thị nút "Previous" nếu customers có trang trước (tức là không phải trang đầu tiên).-->
+<!--customers.hasPrevious() trả về true nếu đang ở trang thứ 2 trở lên.-->
+
+
 <a class="btn btn-primary" th:if="${cusomters.hasPrevious()}"
-   th:href="@{/customers/page(page=${customers.number - 1})}">Previous</a>
+
+   th:href="@{/customers(page=${customers.number - 1})}">Previous</a>
+
+
+
 <span th:text="${customers.number + 1}"></span> | <span th:text="${customers.totalPages}"></span>
 <a class="btn btn-primary" th:if="${customers.hasNext()}"
-   th:href="@{/customers/page(page=${customers.number + 1})}">Next</a>
+   th:href="@{/customers(page=${customers.number + 1})}">Next</a>
 <footer th:replace="/layout :: footer"></footer>
+
+
+
+
 </body>
+
+
+
+
 </html>

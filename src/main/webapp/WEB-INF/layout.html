@@ -121,6 +121,108 @@
                 border-radius: 8px;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+        .search-form {
+            margin-bottom: 1.5rem;
+        }
+
+        .search-form .input-group {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .search-form input {
+            border-radius: 20px 0 0 20px;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1.2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .search-form button {
+            border-radius: 0 20px 20px 0;
+            padding: 0.5rem 1.5rem;
+        }
+
+        /* Pagination Styles */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            gap: 1rem;
+        }
+
+        .pagination-info {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .page-button {
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            background: var(--secondary-color);
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .page-button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .page-info {
+            font-size: 0.9rem;
+            color: #666;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Debug Info Styles */
+        .debug-info {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .debug-info p {
+            margin: 0.5rem 0;
+        }
+
+
+
+
     </style>
 </head>
 
@@ -210,6 +312,89 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container main-content">
+    <!-- Add search form fragment -->
+    <div th:fragment="search-form" class="search-form">
+        <form th:action="@{/customers/search}" method="post" class="d-flex justify-content-center">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Search customers...">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search me-1"></i> Search
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Previous table content -->
+
+    <!-- Add pagination fragment -->
+    <div th:fragment="pagination" class="pagination-container">
+        <a th:if="${customers.hasPrevious()}"
+           th:href="@{/customers/page(page=${customers.number - 1})}"
+           class="page-button">
+            <i class="fas fa-chevron-left"></i> Previous
+        </a>
+
+        <span class="page-info">
+                Page <span th:text="${customers.number + 1}"></span> of
+                <span th:text="${customers.totalPages}"></span>
+            </span>
+
+        <a th:if="${customers.hasNext()}"
+           th:href="@{/customers/page(page=${customers.number + 1})}"
+           class="page-button">
+            Next <i class="fas fa-chevron-right"></i>
+        </a>
+    </div>
+
+    <!-- Add debug info fragment -->
+    <div th:fragment="debug-info" class="debug-info">
+        <p>Current page: <span th:text="${customers.number}"></span></p>
+        <p>Total pages: <span th:text="${customers.totalPages}"></span></p>
+        <p>Has previous: <span th:text="${customers.hasPrevious()}"></span></p>
+        <p>Has next: <span th:text="${customers.hasNext()}"></span></p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Footer -->
 <footer th:fragment="footer" class="text-center">

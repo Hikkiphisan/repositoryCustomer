@@ -39,9 +39,19 @@ public class CustomerController {
         } else {
             customers = customerService.findAll(pageable);
         }
+
+
+
+
+
+
+
+
         ModelAndView modelAndView = new ModelAndView("/customer/list"); //modelandviews đã chứa cả model provinces
+
 //        Iterable<Customer> customers = customerService.findAll();
         modelAndView.addObject("customers", customers);
+        modelAndView.addObject("search", search.orElse("")); // Giữ giá trị tìm kiếm nếu có
 //        auto thêm model "provinces" vào view mà không cần gọi trực tiếp từ phương thức
         return modelAndView;
     }
