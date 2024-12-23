@@ -47,6 +47,7 @@
         <td><a th:href="@{/customers/update/{id}(id=${c.getId()})}">update</a></td>
         <td><a th:href="@{/customers/delete/{id}(id=${c.getId()})}">delete</a></td>
     </tr>
+
     </tbody>
 </table>
 <a class="btn btn-primary" th:if="${cusomters.hasPrevious()}"
